@@ -1,0 +1,24 @@
+form {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  width: 340px;
+  margin-bottom: 20px;
+
+  input {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: 700;
+    background: transparent;
+    color: rgb(90, 106, 146);
+  }
+
+  input::placeholder {
+    color: rgb(90, 106, 146)
+  }
+
+  input:focus {
+    color: #fff;
+  }
+}
