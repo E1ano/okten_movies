@@ -1,8 +1,9 @@
 import React, {FC} from 'react';
 import classes from './MovieCard.module.scss';
 import {Rating} from "@mui/material";
-import {IMovie} from "../../interfaces/movie.interface";
+import {IMovie} from "../../interfaces";
 import {useAppSelector} from "../../hooks/redux.hooks";
+import {urls, notFound} from "../../constans";
 
 interface IProps {
     movie: IMovie
@@ -10,21 +11,20 @@ interface IProps {
 const MovieCard:FC<IProps> = ({movie}) => {
     const {genres} = useAppSelector(state => state.movieReducer);
     const {poster_path, genre_ids, title, overview, vote_average, release_date} = movie;
-    const descr = overview.slice(0, 100) + '...';
-    const poster = "https://image.tmdb.org/t/p/w500/" + poster_path;
-    const date = new Date(release_date);
+    const description = overview ? overview.slice(0, 100) + '...' : notFound.description;
+    const date = release_date ? new Date(release_date).getFullYear() : notFound.year;
     const rate = Math.round(vote_average * 2) / 2;
-    const genreNumber = genre_ids[0];
+    const poster = poster_path ? (urls.poster + poster_path) : notFound.image;
     let genreObj;
-    genreObj = genres ? genres.find(item => item.id === genreNumber) : null;
+    genreObj = genre_ids.length > 1 ? genres?.find(item => item.id === genre_ids[0]) : {name: notFound.genres};
 
     return (
         <div className={classes.wrapper}>
             <div className={classes.poster}><img src={poster} alt={title}/></div>
             <div className={classes.infoWrapper}>
                 <div className={classes.title}>{title}</div>
-                <div className={classes.addInfo}>{date.getFullYear()} | {genreObj?.name}</div>
-                <div className={classes.description}>{descr}</div>
+                <div className={classes.addInfo}>{date} | {genreObj?.name}</div>
+                <div className={classes.description}>{description}</div>
             </div>
             <Rating
                 className={classes.rate}

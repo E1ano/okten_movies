@@ -3,7 +3,7 @@ import classes from './HomePage.module.scss'
 const HomePage = () => {
     return (
         <div>
-            Cool home page
+            At the development stage
         </div>
     );
 };

@@ -1,5 +1,5 @@
-import axios, {AxiosError} from 'axios';
-import {baseURL, urls} from '../constans/urls';
+import axios from 'axios';
+import {baseURL} from '../constans';
 
 const axiosService = axios.create({baseURL});
 

@@ -24,11 +24,11 @@ const MoviesPage = () => {
 
     useEffect(() => {
         dispatch(movieActions.updatePage(page));
-        dispatch(movieActions.getAll(page));
-        dispatch(movieActions.getGenres());
 
         if (query) {
             dispatch(movieActions.getMovieByName([query, page]));
+        } else {
+            dispatch(movieActions.getAll(page));
         }
 
     }, [currentPage, query]);
@@ -41,7 +41,15 @@ const MoviesPage = () => {
         <>
             <div className={classes.cardWrapper}>
                 {
-                    (searchMovies.length > 1 ? searchMovies : movies).map(item => <MovieCard key={item.id} movie={item}/>)
+                    (searchMovies.length > 1 ? searchMovies : movies)
+                        .map(item => (
+                            <Link key={item.id} to={`/movie/${item.id}`} state={{movieData: item}}>
+                                <MovieCard
+                                    key={item.id}
+                                    movie={item}
+                                />
+                            </Link>
+                        ))
                 }
             </div>
             {<ThemeProvider theme={theme}>

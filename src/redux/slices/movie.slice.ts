@@ -1,10 +1,7 @@
-import {IMovie} from "../../interfaces/movie.interface";
-import {IGenre} from "../../interfaces/genre.interface";
+import {IMovie, IGenre, IFullGenres, IFullData } from "../../interfaces";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {AxiosError} from 'axios';
 import movieService from "../../services/movie.service";
-import {IFullData} from "../../interfaces/fullData.interface";
-import {IFullGenres} from "../../interfaces/fullGenres.interface";
 
 interface IState {
     movies: IMovie[],
@@ -75,6 +72,9 @@ const movieSlice = createSlice({
         builder
             .addCase(getAll.fulfilled, (state, action) => {
                 state.movies = action.payload.results;
+                if (state.total_pages !== 500) {
+                    state.total_pages = 500;
+                }
             })
             .addCase(getGenres.fulfilled, (state, action) => {
                 state.genres = action.payload.genres;
@@ -91,7 +91,7 @@ const movieActions = {
     ...actions,
     getAll,
     getGenres,
-    getMovieByName
+    getMovieByName,
 }
 export {
     movieActions,

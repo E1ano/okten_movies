@@ -1,4 +1,3 @@
-import {IMovie} from "./movie.interface";
 
 export interface IFullData<T> {
     page: number,

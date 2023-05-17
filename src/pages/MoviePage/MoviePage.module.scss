@@ -1,0 +1,43 @@
+.wrapper {
+  display: flex;
+  column-gap: 40px;
+
+  max-height: 680px;
+
+  .poster {
+    img {
+      width: 450px;
+    }
+  }
+
+  .infoBlock {
+    .title {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .additionalInfo {
+      font-size: 20px;
+      margin-bottom: 15px;
+    }
+
+    .rate {
+      margin-bottom: 20px;
+      span {
+        font-size: 30px;
+        color: rgb(231, 62, 65);
+      }
+    }
+
+    .description {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 440px;
+    }
+  }
+}

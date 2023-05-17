@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import classes from './Topbar.module.scss';
 import {useForm} from "react-hook-form";
 import SearchIcon from '@mui/icons-material/Search';
@@ -11,7 +11,7 @@ const Topbar = () => {
     const {reset, register, handleSubmit} = useForm<IData>();
     const navigate = useNavigate();
     const searchMovie = (data:IData) => {
-        navigate(`/movies?query=${data.movieSearch}&page=1`);
+        navigate(`/movies?query=${data.movieSearch.trim()}&page=1`);
         reset();
     }
 
