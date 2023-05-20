@@ -4,7 +4,7 @@ import movieService from "../../services/movie.service";
 import {IVideo} from "../../interfaces";
 import classes from "./MoviePage.module.scss";
 import {useAppSelector} from "../../hooks/redux.hooks";
-import {Rating} from "@mui/material";
+import {Rating, Skeleton} from "@mui/material";
 import {urls, notFound} from "../../constans";
 
 const MoviePage = () => {
@@ -57,7 +57,11 @@ const MoviePage = () => {
                         allowFullScreen>
                     </iframe>
                 :
-                null
+                    <Skeleton
+                        animation="wave"
+                        className={classes.skeleton}
+                        sx={{bgcolor: "rgb(90, 106, 146)"}}
+                    />
                 }
                 </div>
         </div>

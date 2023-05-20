@@ -3,7 +3,7 @@ import classes from './MoviesPage.module.scss'
 import {useAppDispatch, useAppSelector} from "../../hooks/redux.hooks";
 import {movieActions} from "../../redux/slices/movie.slice";
 import MovieCard from "../../components/MovieCard/MovieCard";
-import {createTheme, ThemeProvider, Pagination, PaginationItem} from "@mui/material";
+import {createTheme, ThemeProvider, Pagination, PaginationItem, Skeleton} from "@mui/material";
 import {Link, useLocation} from "react-router-dom";
 
 const theme = createTheme({
@@ -15,23 +15,39 @@ const theme = createTheme({
 });
 
 const MoviesPage = () => {
-    const {movies, total_pages, currentPage, searchMovies} = useAppSelector(state => state.movieReducer);
+    const {movies, total_pages, currentPage} = useAppSelector(state => state.movieReducer);
+    console.log(movies)
     const dispatch = useAppDispatch();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const page = +(searchParams.get('page') || '1');
     const query = searchParams.get('query');
+    const withGenres = searchParams.get('with_genres');
+    // const componentsArray = new Array(20).fill(null);
+
 
     useEffect(() => {
         dispatch(movieActions.updatePage(page));
 
         if (query) {
             dispatch(movieActions.getMovieByName([query, page]));
+        } else if (withGenres) {
+            dispatch(movieActions.getMoviesByGenre([withGenres, page]))
         } else {
             dispatch(movieActions.getAll(page));
         }
 
-    }, [currentPage, query]);
+    }, [currentPage, query, withGenres]);
+
+    const getDynamicUrl = (page:number|null) => {
+        if (query) {
+            return `?query=${query}&page=${page}`;
+        } else if (withGenres) {
+            return `?with_genres=${withGenres}&page=${page}`;
+        } else {
+            return `?page=${page}`;
+        }
+    }
 
     const handlePagination = (event:any, page:number) => {
         dispatch(movieActions.updatePage(page))
@@ -41,15 +57,28 @@ const MoviesPage = () => {
         <>
             <div className={classes.cardWrapper}>
                 {
-                    (searchMovies.length > 1 ? searchMovies : movies)
-                        .map(item => (
-                            <Link key={item.id} to={`/movie/${item.id}`} state={{movieData: item}}>
-                                <MovieCard
-                                    key={item.id}
-                                    movie={item}
-                                />
-                            </Link>
-                        ))
+                    movies ?
+                    movies.map(item => (
+                        <Link key={item.id} to={`/movie/${item.id}`} state={{movieData: item}}>
+                            <MovieCard
+                                key={item.id}
+                                movie={item}
+                            />
+                        </Link>
+                    ))
+                    :
+                    null
+                    // <div className={classes.skeletonWrapper}>
+                    //     {
+                    //         componentsArray.map((_, index) => (
+                    //                 <Skeleton
+                    //                     key={index}
+                    //                     animation="wave"
+                    //                     className={classes.skeleton}
+                    //                 />
+                    //         ))
+                    //     }
+                    // </div>
                 }
             </div>
             {<ThemeProvider theme={theme}>
@@ -63,7 +92,7 @@ const MoviesPage = () => {
                     renderItem={(item) => (
                         <PaginationItem
                             component={Link}
-                            to={query ? `?query=${query}&page=${item.page}` : `?page=${item.page}`}
+                            to={getDynamicUrl(item.page)}
                             {...item}
                         />
                     )}
