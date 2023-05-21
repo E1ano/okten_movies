@@ -5,7 +5,7 @@ import {IMovie, IVideo} from "../../interfaces";
 import classes from "./MoviePage.module.scss";
 import {useAppSelector} from "../../hooks/redux.hooks";
 import {Rating, Skeleton} from "@mui/material";
-import {urls, notFound, pages} from "../../constans";
+import {urls, notFound} from "../../constans";
 import {useAppLocation} from "../../hooks/router.hook";
 
 const MoviePage = () => {
@@ -28,7 +28,7 @@ const MoviePage = () => {
         movieService.getVideos(id)
             .then((data) => data.data)
             .then((data) => handleTrailerKey(data))
-            .catch();
+            .catch((error) => console.error(error));
     }, []);
 
     const handleTrailerKey = (data:IVideo) => {
@@ -80,7 +80,7 @@ const MoviePage = () => {
                     <Skeleton
                         animation="wave"
                         className={classes.skeleton}
-                        sx={{bgсolor: "rgb(90, 106, 146)"}}
+                        sx={{bgcolor: "rgb(90, 106, 146)"}}
                     />
                 }
                 </div>

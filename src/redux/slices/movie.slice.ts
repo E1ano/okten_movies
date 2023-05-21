@@ -2,7 +2,6 @@ import {IMovie, IGenre, IFullGenres, IFullData } from "../../interfaces";
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {AxiosError} from 'axios';
 import movieService from "../../services/movie.service";
-import {pages} from "../../constans";
 
 interface IState {
     movies: IMovie[],

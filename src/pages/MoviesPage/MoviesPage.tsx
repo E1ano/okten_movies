@@ -3,8 +3,8 @@ import classes from './MoviesPage.module.scss'
 import {useAppDispatch, useAppSelector} from "../../hooks/redux.hooks";
 import {movieActions} from "../../redux/slices/movie.slice";
 import MovieCard from "../../components/MovieCard/MovieCard";
-import {createTheme, ThemeProvider, Pagination, PaginationItem, Skeleton} from "@mui/material";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {createTheme, ThemeProvider, Pagination, PaginationItem} from "@mui/material";
+import {Link, useLocation} from "react-router-dom";
 
 const theme = createTheme({
     palette: {
@@ -16,7 +16,6 @@ const theme = createTheme({
 
 const MoviesPage = () => {
     const {movies, total_pages, currentPage} = useAppSelector(state => state.movieReducer);
-    console.log(movies)
     const dispatch = useAppDispatch();
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);

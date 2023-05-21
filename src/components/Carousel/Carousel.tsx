@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classes from './Carousel.module.scss';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {IMovie} from "../../interfaces";
 import {urls} from "../../constans";
 

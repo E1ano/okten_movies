@@ -2,13 +2,9 @@ import React, {useEffect} from 'react';
 import classes from './HomePage.module.scss'
 import Carousel from "../../components/Carousel/Carousel";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux.hooks";
-import {urls} from "../../constans";
 import {movieActions} from "../../redux/slices/movie.slice";
 const HomePage = () => {
     const {upcomingMovies, nowPlayingMovies, popularMovies} = useAppSelector(state => state.movieReducer);
-    // const upcomingMoviesImages = upcomingMovies.map(item => `${urls.poster}${item.poster_path}`);
-    // const nowPlayingMoviesImages = nowPlayingMovies.map(item => `${urls.poster}${item.poster_path}`);
-    // const popularMoviesImages = popularMovies.map(item => `${urls.poster}${item.poster_path}`);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
