@@ -5,6 +5,7 @@ import {IFullData, IFullGenres, IMovie, IVideo} from "../interfaces";
 
 const movieService = {
     getAll: (page:number = 1):IRes<IFullData<IMovie[]>> => axiosService.get(`${urls.movie}?page=${page}`),
+    getSimilar: (movie_id:number):IRes<IFullData<IMovie[]>> => axiosService.get(`${urls.videos}/${movie_id}/similar`),
     getNowPlaying: (page:number = 1):IRes<IFullData<IMovie[]>> => axiosService.get(`${urls.nowPlaying}?page=${page}`),
     getPopular: (page:number = 1):IRes<IFullData<IMovie[]>> => axiosService.get(`${urls.popular}?page=${page}`),
     getUpcoming: (page:number = 1):IRes<IFullData<IMovie[]>> => axiosService.get(`${urls.upcoming}?page=${page}`),

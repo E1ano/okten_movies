@@ -3,6 +3,7 @@ import classes from './HomePage.module.scss'
 import Carousel from "../../components/Carousel/Carousel";
 import {useAppDispatch, useAppSelector} from "../../hooks/redux.hooks";
 import {movieActions} from "../../redux/slices/movie.slice";
+import Container from "../../UI/Container/Container";
 const HomePage = () => {
     const {upcomingMovies, nowPlayingMovies, popularMovies} = useAppSelector(state => state.movieReducer);
     const dispatch = useAppDispatch();
@@ -22,18 +23,18 @@ const HomePage = () => {
                 <div className={classes.chevron}></div>
             </div>
             <div className={classes.carouselWrapper}>
-                <div>
+                <Container>
                     <div className={classes.carouselTitle}>Upcoming:</div>
                     <Carousel movies={upcomingMovies}/>
-                </div>
-                <div>
+                </Container>
+                <Container>
                     <div className={classes.carouselTitle}>Now playing:</div>
                     <Carousel movies={nowPlayingMovies}/>
-                </div>
-                <div>
+                </Container>
+                <Container>
                     <div className={classes.carouselTitle}>Popular:</div>
                     <Carousel movies={popularMovies}/>
-                </div>
+                </Container>
             </div>
         </div>
     );

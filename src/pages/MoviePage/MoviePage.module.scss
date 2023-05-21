@@ -1,8 +1,9 @@
 
-.wrapper {
+.movieWrapper {
   display: flex;
   column-gap: 30px;
   max-height: 710px;
+  margin-bottom: 40px;
 
   .poster {
     img {
@@ -60,4 +61,11 @@
       flex-grow: 1;
     }
   }
+}
+
+.carouselTitle {
+  margin: 0 auto 10px;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-color);
 }
