@@ -6,9 +6,9 @@ import {urls} from "../../constans";
 import {movieActions} from "../../redux/slices/movie.slice";
 const HomePage = () => {
     const {upcomingMovies, nowPlayingMovies, popularMovies} = useAppSelector(state => state.movieReducer);
-    const upcomingMoviesImages = upcomingMovies.map(item => `${urls.poster}${item.poster_path}`);
-    const nowPlayingMoviesImages = nowPlayingMovies.map(item => `${urls.poster}${item.poster_path}`);
-    const popularMoviesImages = popularMovies.map(item => `${urls.poster}${item.poster_path}`);
+    // const upcomingMoviesImages = upcomingMovies.map(item => `${urls.poster}${item.poster_path}`);
+    // const nowPlayingMoviesImages = nowPlayingMovies.map(item => `${urls.poster}${item.poster_path}`);
+    // const popularMoviesImages = popularMovies.map(item => `${urls.poster}${item.poster_path}`);
     const dispatch = useAppDispatch();
 
     useEffect(() => {
@@ -28,15 +28,15 @@ const HomePage = () => {
             <div className={classes.carouselWrapper}>
                 <div>
                     <div className={classes.carouselTitle}>Upcoming:</div>
-                    <Carousel images={upcomingMoviesImages}/>
+                    <Carousel movies={upcomingMovies}/>
                 </div>
                 <div>
                     <div className={classes.carouselTitle}>Now playing:</div>
-                    <Carousel images={nowPlayingMoviesImages}/>
+                    <Carousel movies={nowPlayingMovies}/>
                 </div>
                 <div>
                     <div className={classes.carouselTitle}>Popular:</div>
-                    <Carousel images={popularMoviesImages}/>
+                    <Carousel movies={popularMovies}/>
                 </div>
             </div>
         </div>

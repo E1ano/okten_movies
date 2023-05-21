@@ -4,7 +4,7 @@ import {useAppDispatch, useAppSelector} from "../../hooks/redux.hooks";
 import {movieActions} from "../../redux/slices/movie.slice";
 import MovieCard from "../../components/MovieCard/MovieCard";
 import {createTheme, ThemeProvider, Pagination, PaginationItem, Skeleton} from "@mui/material";
-import {Link, useLocation} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 const theme = createTheme({
     palette: {
@@ -23,7 +23,6 @@ const MoviesPage = () => {
     const page = +(searchParams.get('page') || '1');
     const query = searchParams.get('query');
     const withGenres = searchParams.get('with_genres');
-    // const componentsArray = new Array(20).fill(null);
 
 
     useEffect(() => {
@@ -59,26 +58,14 @@ const MoviesPage = () => {
                 {
                     movies ?
                     movies.map(item => (
-                        <Link key={item.id} to={`/movie/${item.id}`} state={{movieData: item}}>
-                            <MovieCard
-                                key={item.id}
-                                movie={item}
-                            />
-                        </Link>
+                        <MovieCard
+                            key={item.id}
+                            movie={item}
+
+                        />
                     ))
                     :
                     null
-                    // <div className={classes.skeletonWrapper}>
-                    //     {
-                    //         componentsArray.map((_, index) => (
-                    //                 <Skeleton
-                    //                     key={index}
-                    //                     animation="wave"
-                    //                     className={classes.skeleton}
-                    //                 />
-                    //         ))
-                    //     }
-                    // </div>
                 }
             </div>
             {<ThemeProvider theme={theme}>

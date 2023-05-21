@@ -9,10 +9,10 @@ import {useNavigate} from "react-router-dom";
 import {movieActions} from "../../redux/slices/movie.slice";
 import {pages} from "../../constans";
 
-type IGenres = Record<string, string>;
+type IGenres = Record<string, boolean>;
 const MultiselectDropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const {register, handleSubmit, reset} = useForm<IGenres>();
+    const {register, handleSubmit, formState: {isValid}} = useForm<IGenres>();
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
@@ -21,6 +21,14 @@ const MultiselectDropdown = () => {
 
     const toggleDropdown = () => {
         setIsOpen(prevState => !prevState);
+    };
+
+    const atLeastOneCheckboxChecked = (value: boolean, genres: IGenres) => {
+        const arr:boolean[] = [];
+        for (const genresKey in genres) {
+            arr.push(genres[genresKey]);
+        }
+        return arr.some(item => item);
     };
 
     const filterByGenre = (data:IGenres) => {
@@ -52,23 +60,18 @@ const MultiselectDropdown = () => {
                             <label key={item}>
                                 <input
                                     type="checkbox"
-                                    {...register(item)}
+                                    {...register(item, {validate: atLeastOneCheckboxChecked})}
                                 />
                                 {item}
                             </label>
                         ))}
                     <div className={classes["buttons-wrapper"]}>
                         <Button
+                            disabled={!isValid}
                             type={"submit"}
                             className={classes["filter-btn"]}
                             variant="outlined">
                             filter
-                        </Button>
-                        <Button
-                            onClick={() => reset()}
-                            className={classes["close-btn"]}
-                            variant="outlined">
-                            clear
                         </Button>
                     </div>
                     </form>

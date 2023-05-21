@@ -50,23 +50,24 @@
 
     .buttons-wrapper {
       display: flex;
-      //grid-template-columns: 80% 20%;
       column-gap: 10px;
       margin-bottom: 10px;
 
       .filter-btn {
+        width: 100%;
         color: rgb(90, 106, 146);
         border-color: rgb(90, 106, 146);
+        transition: 0.2s;
       }
 
-      .close-btn {
-        color: rgb(90, 106, 146);
-        border-color: rgb(90, 106, 146);
-      }
-
-      .filter-btn:hover, .close-btn:hover {
+      .filter-btn:hover {
         color: rgb(231, 62, 65);
         border-color: rgb(231, 62, 65);
+      }
+
+      .filter-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
       }
     }
   }

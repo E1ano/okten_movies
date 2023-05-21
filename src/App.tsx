@@ -7,9 +7,11 @@ import HomePage from "./pages/HomePage/HomePage";
 import MoviesPage from "./pages/MoviesPage/MoviesPage";
 import classes from "./App.module.scss";
 import {movieActions} from "./redux/slices/movie.slice";
-import {useAppDispatch} from "./hooks/redux.hooks";
+import {useAppDispatch, useAppSelector} from "./hooks/redux.hooks";
 
 function App() {
+    const {genres} = useAppSelector(state => state.movieReducer);
+    console.log(genres)
     const dispatch = useAppDispatch();
 
     useEffect(() => {
