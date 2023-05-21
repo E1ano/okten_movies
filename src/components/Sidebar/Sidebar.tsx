@@ -61,7 +61,7 @@ const Sidebar = () => {
     return (
         <div className={classes.wrapper}>
             <div className={classes.topWrapper}>
-                <MovieIcon sx={{fontSize: 42}} style={{ fill: 'rgb(231, 62, 65)'}}/>
+                <MovieIcon onClick={() => navigate(`/`)} sx={{fontSize: 42}} style={{ fill: 'rgb(231, 62, 65)', cursor: "pointer"}}/>
 
                 <nav>
                     <ul className={classes.menu}>
